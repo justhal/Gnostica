@@ -7,7 +7,9 @@ namespace Gnostica.Models
 {
     public class Location
     {
-        public byte? X { get; set; }
-        public byte? Y { get; set; }
+        public int ID { get; set; }
+        public sbyte? X { get; set; }
+        public sbyte? Y { get; set; }
+        public bool Stash { get; set; }
     }
 }

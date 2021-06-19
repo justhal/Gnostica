@@ -9,6 +9,7 @@ namespace Gnostica.Models
 {
     public class Card : Target
     {
+        public int ID { get; set; }
         public Suit? Suit { get; set; }
         public Rank? Rank { get; set; }
         public MajorArcana? MajorArcana { get; set; }
@@ -41,6 +42,7 @@ namespace Gnostica.Models
                 }
             }
         }
+        public bool Valid { get { return IsValid(); } }
 
         public byte? RankNumber
         {
@@ -96,6 +98,8 @@ namespace Gnostica.Models
                 }
             }
         }
+
+        public Card() { }
 
         public Card(Rank rank, Suit suit)
         {

@@ -1,0 +1,72 @@
+﻿@model Gnostica.Models.Deck
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Deck</h4>
+    <hr />
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Rank)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Suit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.MajorArcana)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Valid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.BidValue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.PointValue)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var card in Model.DeckList.OrderBy(d => d.Order))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => card.Card.Rank)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => card.Card.Suit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => card.Card.MajorArcana)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => card.Card.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => card.Card.Valid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => card.Card.BidValue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => card.Card.PointValue)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

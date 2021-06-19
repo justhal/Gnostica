@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace Gnostica.Models
 {
-    public class Player
+    public class CardList
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public List<CardList> Hand { get; set; }
-        public List<Piece> Pieces { get; set; }
+        public Card Card { get; set; }
+        public int Order { get; set; }
     }
 }

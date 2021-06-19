@@ -4,14 +4,16 @@ using Gnostica.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gnostica.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210612080017_AttemptToAddCardsToDatabase")]
+    partial class AttemptToAddCardsToDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,31 +47,6 @@ namespace Gnostica.Data.Migrations
                     b.ToTable("Cards");
                 });
 
-            modelBuilder.Entity("Gnostica.Models.CardList", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CardID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PlayerID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CardID");
-
-                    b.HasIndex("PlayerID");
-
-                    b.ToTable("CardList");
-                });
-
             modelBuilder.Entity("Gnostica.Models.Deck", b =>
                 {
                     b.Property<int>("ID")
@@ -77,60 +54,12 @@ namespace Gnostica.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.ToTable("Decks");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.DeckList", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CardID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DeckID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CardID");
-
-                    b.HasIndex("DeckID");
-
-                    b.ToTable("DeckLists");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.Game", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("DeckID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Round")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Turn")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DeckID");
-
-                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("Gnostica.Models.Location", b =>
@@ -139,9 +68,6 @@ namespace Gnostica.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Stash")
-                        .HasColumnType("bit");
 
                     b.Property<short?>("X")
                         .HasColumnType("smallint");
@@ -152,48 +78,6 @@ namespace Gnostica.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Location");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.Piece", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("LocationID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PlayerID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("LocationID");
-
-                    b.HasIndex("PlayerID");
-
-                    b.ToTable("Piece");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.Player", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("GameID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("GameID");
-
-                    b.ToTable("Players");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -401,71 +285,6 @@ namespace Gnostica.Data.Migrations
                     b.HasOne("Gnostica.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationID");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.CardList", b =>
-                {
-                    b.HasOne("Gnostica.Models.Card", "Card")
-                        .WithMany()
-                        .HasForeignKey("CardID");
-
-                    b.HasOne("Gnostica.Models.Player", null)
-                        .WithMany("Hand")
-                        .HasForeignKey("PlayerID");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.DeckList", b =>
-                {
-                    b.HasOne("Gnostica.Models.Card", "Card")
-                        .WithMany()
-                        .HasForeignKey("CardID");
-
-                    b.HasOne("Gnostica.Models.Deck", "Deck")
-                        .WithMany("DeckList")
-                        .HasForeignKey("DeckID");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.Game", b =>
-                {
-                    b.HasOne("Gnostica.Models.Deck", "Deck")
-                        .WithMany()
-                        .HasForeignKey("DeckID");
-                });
-
-            modelBuilder.Entity("Gnostica.Models.Piece", b =>
-                {
-                    b.HasOne("Gnostica.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationID");
-
-                    b.HasOne("Gnostica.Models.Player", null)
-                        .WithMany("Pieces")
-                        .HasForeignKey("PlayerID");
-
-                    b.OwnsOne("Gnostica.Models.Orientation", "Orientation", b1 =>
-                        {
-                            b1.Property<int>("PieceID")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<int>("direction")
-                                .HasColumnType("int");
-
-                            b1.HasKey("PieceID");
-
-                            b1.ToTable("Piece");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PieceID");
-                        });
-                });
-
-            modelBuilder.Entity("Gnostica.Models.Player", b =>
-                {
-                    b.HasOne("Gnostica.Models.Game", null)
-                        .WithMany("Players")
-                        .HasForeignKey("GameID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
