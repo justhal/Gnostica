@@ -12,6 +12,9 @@ using Gnostica.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.ComponentModel;
+using SixLabors.ImageSharp;
+using Gnostica.Models;
 
 namespace Gnostica
 {
@@ -34,6 +37,7 @@ namespace Gnostica
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            TypeDescriptor.AddAttributes(typeof(Color), new TypeConverterAttribute(typeof(ColorTypeConverter)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

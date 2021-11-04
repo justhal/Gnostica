@@ -14,7 +14,8 @@
       "launchUrl": "Decks/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "sqlDebugging": false
     },
     "Gnostica": {
       "commandName": "Project",

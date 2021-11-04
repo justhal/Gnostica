@@ -4,14 +4,16 @@ using Gnostica.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gnostica.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211003223711_CardsInGames")]
+    partial class CardsInGames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,7 @@ namespace Gnostica.Data.Migrations
                     b.ToTable("Cards");
                 });
 
-            modelBuilder.Entity("Gnostica.Models.CardInCardList", b =>
+            modelBuilder.Entity("Gnostica.Models.CardList", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -58,9 +60,6 @@ namespace Gnostica.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CardID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DeckID")
                         .HasColumnType("int");
 
                     b.Property<int>("Order")
@@ -76,14 +75,12 @@ namespace Gnostica.Data.Migrations
 
                     b.HasIndex("CardID");
 
-                    b.HasIndex("DeckID");
-
                     b.HasIndex("PlayerGamePlayerID", "PlayerGameGameID");
 
-                    b.ToTable("DeckLists");
+                    b.ToTable("CardList");
                 });
 
-            modelBuilder.Entity("Gnostica.Models.CardList", b =>
+            modelBuilder.Entity("Gnostica.Models.Deck", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -93,6 +90,31 @@ namespace Gnostica.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Decks");
+                });
+
+            modelBuilder.Entity("Gnostica.Models.DeckList", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CardID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DeckID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CardID");
+
+                    b.HasIndex("DeckID");
+
+                    b.ToTable("DeckLists");
                 });
 
             modelBuilder.Entity("Gnostica.Models.Game", b =>
@@ -437,28 +459,35 @@ namespace Gnostica.Data.Migrations
                         .HasForeignKey("LocationID");
                 });
 
-            modelBuilder.Entity("Gnostica.Models.CardInCardList", b =>
+            modelBuilder.Entity("Gnostica.Models.CardList", b =>
                 {
                     b.HasOne("Gnostica.Models.Card", "Card")
                         .WithMany()
                         .HasForeignKey("CardID");
-
-                    b.HasOne("Gnostica.Models.CardList", "Deck")
-                        .WithMany("DeckList")
-                        .HasForeignKey("DeckID");
 
                     b.HasOne("Gnostica.Models.PlayerGame", null)
                         .WithMany("Hand")
                         .HasForeignKey("PlayerGamePlayerID", "PlayerGameGameID");
                 });
 
+            modelBuilder.Entity("Gnostica.Models.DeckList", b =>
+                {
+                    b.HasOne("Gnostica.Models.Card", "Card")
+                        .WithMany()
+                        .HasForeignKey("CardID");
+
+                    b.HasOne("Gnostica.Models.Deck", "Deck")
+                        .WithMany("DeckList")
+                        .HasForeignKey("DeckID");
+                });
+
             modelBuilder.Entity("Gnostica.Models.Game", b =>
                 {
-                    b.HasOne("Gnostica.Models.CardList", "Deck")
+                    b.HasOne("Gnostica.Models.Deck", "Deck")
                         .WithMany()
                         .HasForeignKey("DeckID");
 
-                    b.HasOne("Gnostica.Models.CardList", "Discards")
+                    b.HasOne("Gnostica.Models.Deck", "Discards")
                         .WithMany()
                         .HasForeignKey("DiscardsID");
 

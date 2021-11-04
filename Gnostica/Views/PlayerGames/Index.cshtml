@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Gnostica.Models.PlayerGame>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Player)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PieceColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eliminated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PieceColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eliminated)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { playerID = item.PlayerID, gameID = item.GameID }) |
+                @Html.ActionLink("Details", "Details", new { playerID = item.PlayerID, gameID = item.GameID }) |
+                @Html.ActionLink("Delete", "Delete", new { playerID = item.PlayerID, gameID = item.GameID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

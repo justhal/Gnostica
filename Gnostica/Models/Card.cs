@@ -94,7 +94,7 @@ namespace Gnostica.Models
                 } else
                 {
                     // This should never happen.
-                    return 0;
+                    return Byte.MaxValue;
                 }
             }
         }
@@ -207,7 +207,7 @@ namespace Gnostica.Models
                 }
             }
             // This should never happen.
-            return base.ToString();
+            return "UNKNOWN/INVALID GNOSTICA CARD: " + base.ToString();
         }
     }
 

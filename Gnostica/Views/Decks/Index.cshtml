@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gnostica.Models.Deck>
+﻿@model IEnumerable<Gnostica.Models.CardList>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,7 +20,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DeckList.Count)
+                @Html.DisplayNameFor(model => model.Cards.Count)
             </th>
             <th></th>
         </tr>
@@ -29,7 +29,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DeckList.Count)
+                @Html.DisplayFor(modelItem => item.Cards.Count)
             </td>
             <td>
                 @* <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> | *@

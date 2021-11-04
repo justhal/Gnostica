@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace Gnostica.Models
 {
-    public class DeckList
+    public class CardInCardList
     {
         public int ID { get; set; }
-        public Deck Deck { get; set; }
+        public CardList Deck { get; set; }
         public Card Card { get; set; }
         public int Order { get; set; }
 
-        public DeckList() { }
+        public CardInCardList() { }
 
-        public DeckList(Deck deck, Card card, int order)
+        public CardInCardList(CardList deck, Card card, int order = int.MaxValue)
         {
             Deck = deck;
             Card = card;

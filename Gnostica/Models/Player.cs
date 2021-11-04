@@ -9,7 +9,12 @@ namespace Gnostica.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<CardList> Hand { get; set; }
-        public List<Piece> Pieces { get; set; }
+        
+        public List<PlayerGame> PlayerGames { get; set; }
+
+        public void Initialize()
+        {
+            PlayerGames = new List<PlayerGame>(GnosticaParameters.MAX_EXPECTED_GAMES_PER_PLAYER);
+        }
     }
 }

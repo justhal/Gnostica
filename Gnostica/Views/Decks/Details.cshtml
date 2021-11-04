@@ -1,4 +1,4 @@
-﻿@model Gnostica.Models.Deck
+﻿@model Gnostica.Models.CardList
 
 @{
     ViewData["Title"] = "Details";
@@ -14,30 +14,30 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Rank)
+                    @Html.DisplayNameFor(model => model.Cards.FirstOrDefault().Card.Rank)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Suit)
+                    @Html.DisplayNameFor(model => model.Cards.FirstOrDefault().Card.Suit)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.MajorArcana)
+                    @Html.DisplayNameFor(model => model.Cards.FirstOrDefault().Card.MajorArcana)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Type)
+                    @Html.DisplayNameFor(model => model.Cards.FirstOrDefault().Card.Type)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.Valid)
+                    @Html.DisplayNameFor(model => model.Cards.FirstOrDefault().Card.Valid)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.BidValue)
+                    @Html.DisplayNameFor(model => model.Cards.FirstOrDefault().Card.BidValue)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DeckList.FirstOrDefault().Card.PointValue)
+                    @Html.DisplayNameFor(model => model.Cards.FirstOrDefault().Card.PointValue)
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var card in Model.DeckList.OrderBy(d => d.Order))
+            @foreach (var card in Model.Cards.OrderBy(d => d.Order))
             {
                 <tr>
                     <td>
