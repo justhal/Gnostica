@@ -24,7 +24,13 @@
             </div>
             <div>
                 <h4>Players</h4>
-
+                @for (byte playerNum = 1; playerNum != GnosticaParameters.MAX_PLAYERS_PER_GAME + 1; playerNum++)
+                {
+                    <div class="player" id="Player-@(playerNum)" data-player-num="@playerNum" style="display: none;">
+                        <label for="Name-@(playerNum)" class="control-label">Player @playerNum:</label>
+                        <select id="Name-@(playerNum)" asp-for="ID" class="form-control player-selector" asp-items="@(new SelectList(ViewBag.PlayerList, "ID", "Name"))"></select>
+                    </div>
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -39,4 +45,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="/js/Views/Games/Create.js"></script>
 }

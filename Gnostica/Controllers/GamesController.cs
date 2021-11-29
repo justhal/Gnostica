@@ -44,9 +44,11 @@ namespace Gnostica.Controllers
         }
 
         // GET: Games/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-
+            var playerList = await _context.Players.ToListAsync();
+            playerList.Insert(0, new Player { Name = "Select Player" });
+            ViewBag.PlayerList = playerList;
             return View();
         }
 
